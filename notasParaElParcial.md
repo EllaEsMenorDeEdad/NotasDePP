@@ -87,10 +87,9 @@ public int hashCode() {
 ## Ordenar el código
 
 1. Imports
-2. Statics: constantes
-3. Atributos: públicos, privados
-4. Constructores especializados
-5. Constructores
-6. Métodos: públicos, privados
-7. Métodos auxiliares: inline y refactors
-8. Getters y setters
+2. Atributos: públicos, privados
+3. Constructores especializados
+4. Constructores
+5. Métodos: públicos, privados
+6. Métodos auxiliares: inline y refactors
+7. Getters y setters
