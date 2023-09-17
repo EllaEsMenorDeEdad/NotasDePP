@@ -52,6 +52,7 @@ lista.stream().forEach(elemento -> {
     // ...
 });
 ```
+```
 
 >Dejar los ifs cómo están, no es requerimiento sacarlos.
 
@@ -72,8 +73,17 @@ assertThrows(Exception.class, () -> {
     assertEquals(1, 1);
 });
 ```
+### 7. Reemplazar assertEquals por assert true/false
+    
+```java
+assertEquals(1, 1 == 1);
+```
 
-### 7. Implementar hash
+```java
+assertTrue( 1 == 1);
+```
+
+### 8. Implementar hash
 
 Cuando hay un equals se tiene que implementar un hash. Esto hace que el equals sea más eficiente.
 
