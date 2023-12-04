@@ -10,7 +10,7 @@ Este paso consiste en comprender la herramienta que se está por hacer y qué es
 
 >Importante: Darse cuenta que es lo que NO nos pide la consigna para no atrasarse en nada inútil.
 
-## Ejemplo
+__Ejemplo:__
 
 Se busca construir una agenda que permita registrar feriados y consultar si un día es
 feriado.
@@ -28,7 +28,7 @@ Considere java.time.LocalDate para las fechas y java.time.DayOfWeek para los dí
 la semana. Son modelos de fechas y días ya incluidos en las librerías de Java,
 precarios pero funcionales y útiles para el parcial.
 
-### En este ejemplo podríamos hacer esta checklist:
+__En este ejemplo podríamos hacer esta checklist:__
 
 - [ ] Registrar feriados puntuales
 - [ ] Registrar feriados semanales
@@ -46,7 +46,7 @@ precarios pero funcionales y útiles para el parcial.
 
 En el caso de que en la consigna nos ofrezcan usar alguna o varias librerías, investigar que hacen y cómo podríamos usarlas para facilitar nuestro código. Tenemos que estar revisando nuestra checklist para ver si alguna función ya está hecha por la librería
 
-### Ejemplo
+__Ejemplo:__
 
 Investigamos que en la consigna nos ofrecen las librerías `java.time.LocalDate` y `java.time.DayOfWeek`. En estas ya existen las clases fecha y día de la semana, por lo que no tenemos que hacerlas nosotros.
 
@@ -54,12 +54,106 @@ Investigamos que en la consigna nos ofrecen las librerías `java.time.LocalDate`
 - [ ] Registrar feriados semanales
 - [ ] Registrar periodos de feriados
 - [ ] Consultar si un día es feriado
-- [x] Clase fecha
-- [x] Clase día de la semana
+- [x] Clase fecha (`java.time.LocalDate`)
+- [x] Clase día de la semana (`java.time.DayOfWeek`)
 - [ ] Clase período
 
 ## Paso 3
 
 ### Hacemos TDD
 
-Dentro de nuestra checklist tenemos que darnnos cuenta de qué es lo más básico que debe hacer (o que no debería hacer)
+Dentro de nuestra checklist Buscamos la cosa más básica que debe de estar implementada y cuando la tengamos, tenemos que pensar en que es lo más básico que debería de hacer (o que nó debería de hacer). Con eso hacemos el primer test.
+
+__Ejemplo:__
+
+En este caso, lo más básico que debería de hacer es registrar feriados puntuales. Entonces hacemos el primer test.
+
+```java
+@Test
+public void test00registrarFeriadoPuntual() {
+    Agenda agenda = new Agenda();
+    agenda.registrarFeriado(LocalDate.of(2021, 5, 25));
+    assertTrue(agenda.esFeriado(LocalDate.of(2021, 5, 25)));
+}
+```
+
+## Paso 4
+
+### Hardcodeamos la respuesta
+
+Aquí tenemos que hacer que el test pase de la forma más rápida posible. Para eso, hardcodeamos la respuesta. También podemos comenzar a hacer una estructura mínima de nuestro código para montar la base de los siguientes testst.
+
+__Ejemplo:__
+
+```java
+public class Agenda {
+    public void registrarFeriado(LocalDate fecha) {
+    }
+
+    public boolean esFeriado(LocalDate fecha) {
+        return true;
+    }
+}
+```
+
+- [x] Registrar feriados puntuales
+- [ ] Registrar feriados semanales
+- [ ] Registrar periodos de feriados
+- [ ] Consultar si un día es feriado
+- [x] Clase fecha (`java.time.LocalDate`)
+- [x] Clase día de la semana (`java.time.DayOfWeek`)
+- [ ] Clase período
+
+## Paso 5
+
+### Volvemos al paso 3
+
+Ahora que tenemos un test que pasa, volvemos al paso 3 y buscamos la siguiente cosa más básica que debería de hacer. Si a la hora de tratar de hacer que pase nuestro test rompemos el anterior, entonces buscamos una forma menos harcodeada de hacerlo.
+
+__Ejemplo:__
+
+En este caso, lo siguiente más básico que debería de hacer es registrar feriados semanales. Entonces hacemos el segundo test.
+
+```java
+@Test
+public void test01registrarFeriadoSemanal() {
+    Agenda agenda = new Agenda();
+    agenda.registrarFeriado(DayOfWeek.SUNDAY);
+    assertTrue(agenda.esFeriado(LocalDate.of(2021, 5, 30)));
+}
+```
+
+```java
+public class Agenda {
+    private List<LocalDate> feriadosPuntuales = new ArrayList<>();
+    private List<DayOfWeek> feriadosSemanales = new ArrayList<>();
+
+    public void registrarFeriado(LocalDate fecha) {
+        feriadosPuntuales.add(fecha);
+    }
+
+    public void registrarFeriado(DayOfWeek dia) {
+        feriadosSemanales.add(dia);
+    }
+
+    public boolean esFeriado(LocalDate fecha) {
+        return feriadosPuntuales.contains(fecha) || feriadosSemanales.contains(fecha.getDayOfWeek());
+    }
+}
+```
+
+- [x] Registrar feriados puntuales
+- [x] Registrar feriados semanales
+- [ ] Registrar periodos de feriados
+- [ ] Consultar si un día es feriado
+- [x] Clase fecha (`java.time.LocalDate`)
+- [x] Clase día de la semana (`java.time.DayOfWeek`)
+- [ ] Clase período
+
+>Comentario: de esta forma vamos complejizando nuestro código de a poco. Siempre buscando la forma más simple de hacerlo.
+
+## Paso 6
+
+### Refactorizamos nuestro código y nuestros test
+
+Para esto hice anteriormente para el parcial el paso a paso de cómo refactorizar nuestro código y nuestros test. Lo pueden encontrar en el archivo `notasParaElParcial.md`.

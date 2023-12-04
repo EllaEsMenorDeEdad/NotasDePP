@@ -52,7 +52,6 @@ lista.stream().forEach(elemento -> {
     // ...
 });
 ```
-```
 
 >Dejar los ifs cómo están, no es requerimiento sacarlos.
 
@@ -73,8 +72,9 @@ assertThrows(Exception.class, () -> {
     assertEquals(1, 1);
 });
 ```
+
 ### 7. Reemplazar assertEquals por assert true/false
-    
+
 ```java
 assertEquals(1, 1 == 1);
 ```
