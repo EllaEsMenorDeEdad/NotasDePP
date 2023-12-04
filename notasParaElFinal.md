@@ -156,4 +156,4 @@ public class Agenda {
 
 ### Refactorizamos nuestro código y nuestros test
 
-Para esto hice anteriormente para el parcial el paso a paso de cómo refactorizar nuestro código y nuestros test. Lo pueden encontrar en el archivo `[notasParaElParcial.md](notasParaElParcial.md)`.
+Para esto hice anteriormente para el parcial el paso a paso de cómo refactorizar nuestro código y nuestros test. Lo pueden encontrar en el archivo [`notasParaElParcial.md`](https://github.com/EllaEsMenorDeEdad/NotasDePP/blob/main/notasParaElParcial.md).
